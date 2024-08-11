@@ -37,7 +37,6 @@ class ResponsiblePerson {
         return 'too young';
     }
 
-    // don't do it, folks!
     drinkAndDrive() {
         return 'dead';
     }
