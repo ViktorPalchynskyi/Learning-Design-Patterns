@@ -53,3 +53,34 @@ class Creature {
 const c = new Creature();
 c.agility = 22;
 c.agility = 10;
+
+class Car {
+    drive() {
+        console.log(`Car is being driven`);
+    }
+}
+
+class CarProxy {
+    constructor(driver) {
+        this.driver = driver;
+        this._car = new Car();
+    }
+
+    drive() {
+        if (this.driver.age >= 16) {
+            this._car.drive();
+        } else {
+            console.log('Driver too young');
+        }
+    }
+}
+
+class Driver {
+    constructor(age) {
+        this.age = age;
+    }
+}
+
+const car = new CarProxy(new Driver(17));
+
+car.drive();
