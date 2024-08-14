@@ -12,9 +12,6 @@ class ExpressionProcessor {
         let current = 0;
         let nextOp = this.nextOp.nothing;
 
-        // Udemy does not like this
-        //let parts = 
-
         let parts = expression.split(/(?<=[+-])/);
 
         for (let part of parts) {
