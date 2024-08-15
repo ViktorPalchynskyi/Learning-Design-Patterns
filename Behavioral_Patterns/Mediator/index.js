@@ -66,3 +66,85 @@ room.join(simon);
 simon.say('hello everyone!');
 
 karen.pm('Simon', 'glad you to join us');
+
+class Event {
+    constructor() {
+        this.handlers = new Map();
+        this.count = 0;
+    }
+
+    subscribe(handler) {
+        this.handlers.set(++this.count, handler);
+        return this.count;
+    }
+
+    unsubscribe(idx) {
+        this.handlers.delete(idx);
+    }
+
+    fire(sender, args) {
+        this.handlers.forEach(function (v, k) {
+            v(sender, args);
+        });
+    }
+}
+
+class PlayerScoredEventArgs {
+    constructor(playerName, goalsScoredSoFar) {
+        this.playerName = playerName;
+        this.goalsScoredSoFar = goalsScoredSoFar;
+    }
+
+    print() {
+        console.log(
+            `${this.playerName} has scored their ${this.goalsScoredSoFar} goal`
+        );
+    }
+}
+
+class Game {
+    constructor() {
+        this.events = new Event();
+    }
+}
+
+class Player {
+    constructor(name, game) {
+        this.name = name;
+        this.game = game;
+        this.goalsScored = 0;
+    }
+
+    score() {
+        this.goalsScored++;
+        const args = new PlayerScoredEventArgs(
+            this.name,
+            this.goalsScored
+        );
+
+        this.game.events.fire(this, args);
+    }
+}
+
+class Coach {
+    constructor(game) {
+        game.events.subscribe((sender, args) => {
+            if (
+                args instanceof PlayerScoredEventArgs &&
+                args.goalsScoredSoFar < 3
+            ) {
+                console.log(
+                    `Coach says: well done, ${args.playerName}!`
+                );
+            }
+        });
+    }
+}
+
+const game = new Game();
+const player = new Player('Ronaldo', game);
+const coach = new Coach(game);
+
+player.score();
+player.score();
+player.score();
