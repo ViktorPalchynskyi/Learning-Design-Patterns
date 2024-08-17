@@ -14,7 +14,6 @@ const player2 = {
     stop() {},
 };
 
-
 class Player2Adapter {
     instance;
     constructor(player) {
@@ -41,4 +40,3 @@ if (browser > 5) {
 }
 
 currentPlayer.play();
-
