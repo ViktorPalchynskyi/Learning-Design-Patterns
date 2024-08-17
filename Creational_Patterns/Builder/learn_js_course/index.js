@@ -2,7 +2,7 @@ const CustomerBuilder = {
     customer: {},
     setMainInfo(name) {
         this.customer.name = name;
-
+        
         return this;
     },
     setAddressInfo() {
@@ -22,3 +22,9 @@ const CustomerBuilder = {
         return result;
     },
 };
+
+CustomerBuilder.setMainInfo('Viktor');
+
+const customer = CustomerBuilder.getCustomer();
+
+console.log(customer);
