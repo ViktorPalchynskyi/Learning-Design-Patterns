@@ -1,4 +1,4 @@
-import { DogImageContainer } from "./containers/DogImage/DogImage";
+import DogImageContainer from "./containers/DogImage/DogImage";
 
 function App() {
     return (
