@@ -5,18 +5,23 @@ import { Kelvin } from './components/Kelvin/Kelvin';
 import { Fahrenheit } from './components/Fahrenheit/Fahrenheit';
 
 function App() {
+    const random = Math.round(Math.random * 10);
+
     return (
         <>
             <Title render={() => <h1>Hello there</h1>} />
-            <InputContainer>
-                {(value) => (
-                    <>
-                        <Kelvin value={value} />
-                        <Fahrenheit value={value} />
-                    </>
-                )}
-            </InputContainer>
-            <DogImageContainer />
+            {random > 5 ? (
+                <InputContainer>
+                    {(value) => (
+                        <>
+                            <Kelvin value={value} />
+                            <Fahrenheit value={value} />
+                        </>
+                    )}
+                </InputContainer>
+            ) : (
+                <DogImageContainer />
+            )}
         </>
     );
 }
